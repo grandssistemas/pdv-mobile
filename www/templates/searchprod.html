@@ -1,0 +1,19 @@
+
+<ion-view view-title="Pedido de Venda">
+  <ion-nav-buttons side="right">
+      <button class="button" ng-click="doSomething()">
+        <i class="icon ion-ios-cart"></i>
+      </button>
+    </ion-nav-buttons>
+  <ion-content class="padding has-header" >
+    <div class="item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Digite aqui sua busca" ng-model="searchValue" ng-keyup="search($event)">
+      </label>
+      <!-- <button class="button button-balanced button-small ">
+        <i class="ion-ios-search-strong"></i>
+      </button> -->
+    </div>
+  </ion-content>
+</ion-view>
