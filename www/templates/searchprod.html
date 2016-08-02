@@ -1,19 +1,41 @@
 
 <ion-view view-title="Pedido de Venda">
   <ion-nav-buttons side="right">
-      <button class="button" ng-click="doSomething()">
-        <i class="icon ion-ios-cart"></i>
-      </button>
+        <i class="icon ion-ios-cart icon-without-button ion-lg"></i>
     </ion-nav-buttons>
   <ion-content class="padding has-header" >
     <div class="item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Digite aqui sua busca" ng-model="searchValue" ng-keyup="search($event)">
+        <input type="text" placeholder="Pesquise o produto" ng-model="searchValue" ng-keyup="search($event)">
       </label>
-      <!-- <button class="button button-balanced button-small ">
-        <i class="ion-ios-search-strong"></i>
-      </button> -->
+    </div>
+    <div class="text-center">
+      <button class="button button-small button-balanced"
+      ng-class="{'button-outline': place != 'CATEGORY'}"
+      ng-click="getLevel('CATEGORY')">Categorias</button>
+      <button class="button button-small button-balanced"
+      ng-class="{'button-outline': place != 'PRODUCTTYPE'}"
+      ng-click="getLevel('PRODUCTTYPE')">Tipo de Produtos</button>
+      <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"></button>
+    </div>
+    <div ng-repeat="item in values">
+      <div ng-class="{'text-center':!item.categoryType}">
+        <button class="button button-clear button-stable" ng-click="getFather(item)">
+          <i class="ion-chevron-left ion-sm p-r" ng-show="item.categoryType"></i>
+          <b>
+            {{item.name|uppercase}}
+          </b>
+        </button>
+      </div>
+      <div class="list list-no-style">
+
+        <span class="item clickable item-icon-right" ng-repeat="child in item.childrens"
+          ng-click="getChildren(child)">
+          <i class="icon ion-chevron-right ion-sm"></i>
+          {{child.name}}
+        </span>
+      </div>
     </div>
   </ion-content>
 </ion-view>

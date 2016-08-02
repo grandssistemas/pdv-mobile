@@ -8,7 +8,7 @@ $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
-$balanced:                        #33cd5f !default;
+$balanced:                        #18a689 !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
@@ -21,3 +21,34 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.p-r {
+  padding-right: 15px;
+}
+
+.item.activated.clickable{
+  border-color: #ccc;
+  background-color: #D9D9D9;
+}
+
+.ion-sm{
+  font-size: 15px!important;
+}
+
+.ion-lg{
+  font-size: 30px!important;
+}
+
+.icon-without-button{
+  padding-right: 5px!important;
+  padding-top: 2px!important;
+}
+
+.list-no-style>.item{
+  border: none;
+  padding: 8px;
+}
+
+.list-no-style{
+  border: none;
+  box-shadow: none;
+}

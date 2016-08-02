@@ -11,7 +11,7 @@ angular.module('app.core', ['ionic','LocalStorageModule'])
     }
   });
 })
-.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider) {
+.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider) {
 
   $stateProvider.state('sale', {
     url: '/sale',
@@ -34,4 +34,15 @@ angular.module('app.core', ['ionic','LocalStorageModule'])
 
   localStorageServiceProvider
     .setPrefix('fashionmanager-pdv');
+
+
+    var countLoader = 0, countSuccessMessage = 0;
+    $httpProvider.interceptors.push(function () {
+        return {
+            'request': function (config) {
+                config.headers['gumgaToken'] = 'PDVMOBILE';
+                return config;
+            }
+        };
+    })
 })
