@@ -1,13 +1,14 @@
 
 <ion-view view-title="Pedido de Venda">
   <ion-nav-buttons side="right">
-        <i class="icon ion-ios-cart icon-without-button ion-lg"></i>
+        <i class="icon fa fa-shopping-cart  icon-without-button ion-lg"></i>
     </ion-nav-buttons>
   <ion-content class="padding has-header">
     <div class="item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Pesquise o produto" ng-model="searchValue" ng-keyup="search($event)">
+        <input type="text" placeholder="Pesquise o produto" ng-model="searchValue"
+         ng-keyup="search($event,searchValue)">
       </label>
     </div>
     <div class="text-center">
@@ -30,7 +31,6 @@
           </button>
         </div>
         <div class="list list-no-style">
-
           <span class="item clickable item-icon-right" ng-repeat="child in item.childrens"
             ng-click="getChildren(child)">
             <i class="icon ion-chevron-right ion-sm"></i>
@@ -39,8 +39,9 @@
         </div>
       </div>
     </div>
-    <div ng-show="products">
-        <grands-product product="prod" ng-repeat="prod in products"></grands-product>  
+    <div class="row" ng-show="products" ng-repeat="prod in products">
+        <grands-product first="$first" class="col col-50" product="prod[0]"></grands-product>
+        <grands-product product="prod[1]" class="col" ng-show="prod[1]"></grands-product>
     </div>
   </ion-content>
 </ion-view>

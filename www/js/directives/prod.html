@@ -1,0 +1,22 @@
+  <div class="row">
+    <div class="img-responsive">
+      <img src="/img.png" ng-src="data:image/png;base64,{{product.item.logo.bytes}}"
+        ng-if="product.item.logo.bytes" class="img-product-list"/>
+      <img src="/img/padrao.gif" ng-if="!product.item.logo.bytes" alt="teste"
+        class="img-product-list"/>
+    </div>
+  </div>
+  <div class="row">
+    <span>{{product.item.name}}</span>
+  </div>
+  <div class="row">
+    <div class="col col-75 col-bottom">
+      <b class="positive f-lg">
+        {{product.item.productInternalBarCodes[0].saleValue|currency:'R$'}}
+      </b>
+    </div>
+    <div class="col col-25 col-bottom">
+      <span class="balanced fa fa-cart-plus fa-2x"></span>
+    </div>
+  </div>
+</div>

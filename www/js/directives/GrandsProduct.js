@@ -1,15 +1,15 @@
-var template = '{{product.name}}';
 
 angular.module('app.core')
   .directive('grandsProduct',function(){
     return {
-      template: template,
+      templateUrl: '/js/directives/prod.html',
       restrict: 'E',
       scope: {
-        product: '='
+        product: '=',
+        $first: '=first'
       },
       link: function (scope, elm, attrs) {
-
+        console.log(scope.product)
       }
     }
   })

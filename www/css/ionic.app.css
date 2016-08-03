@@ -9839,3 +9839,30 @@ a.button {
 .list-no-style {
   border: none;
   box-shadow: none; }
+
+.img-product-list {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%; }
+
+.full-width {
+  max-width: 100%; }
+
+.f-lg {
+  font-size: 16px; }
+
+/* Extra small devices */
+@media (max-width: 768px) {
+  .img-responsive {
+    height: 150px; } }
+
+/* Small devices */
+@media (min-width: 768px) and (max-width: 992px) {
+  .img-responsive {
+    height: 350px; } }
+
+/* Medium devices */
+/* Large devices */
+/* Extra large devices */
