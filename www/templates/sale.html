@@ -1,5 +1,67 @@
-<ion-view view-title="Venda">
-	<ion-content>
-    <h1>Venda</h1>
+<ion-view view-title="Pedido de Venda">
+  <ion-content class="padding has-header">
+
+    <h4 class="balanced text-center m-t">BUSCAR PRODUTO</h3>
+    <div class="item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Pesquise o produto" ng-model="searchValue"
+         ng-keyup="search($event,searchValue)">
+      </label>
+    </div>
+    <div class="text-center">
+      <button class="button button-small button-balanced"
+      ng-class="{'button-outline': place != 'CATEGORY'}"
+      ng-click="getLevel('CATEGORY')">Categorias</button>
+      <button class="button button-small button-balanced"
+      ng-class="{'button-outline': place != 'PRODUCTTYPE'}"
+      ng-click="getLevel('PRODUCTTYPE')">Tipo de Produtos</button>
+      <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"></button>
+    </div>
+    <div>
+    <h4 class="balanced text-center m-t">LISTA DE COMPRA</h3>
+		<ion-list class="list-no-style">
+		  <ion-item class="n-p" ng-repeat="item in entity.movements">
+        <div class="row n-p">
+          <div class="col">
+            <p>
+              {{item.item.item.name}}
+            </p>
+          </div>
+        </div>
+        <div class="row n-p">
+          <div class="col col-60">
+            <b>
+              Qtd.:  {{item.count}}
+            </b>
+          </div>
+          <div class="col text-right">
+            <b class="positive">
+              {{item.saleValue*item.count|currency:'R$'}}
+            </b>
+          </div>
+        </div>
+
+        <!-- <ion-option-button class="button-balanced button-clear icon-center"
+                           ng-click="share(item)">
+                           <i class="icon ion-plus icon-list-option"></i>
+        </ion-option-button>
+        <ion-option-button class="button-assertive button-clear"
+                           ng-click="share(item)">
+          <i class="icon ion-minus icon-list-option"></i>
+        </ion-option-button> -->
+        <ion-option-button class="button-assertive "
+                           ng-click="edit(item)">
+                           <i class="icon ion-trash-a icon-list-option"></i>
+        </ion-option-button>
+		  </ion-item>
+		</ion-list>
+    </div>
   </ion-content>
+  <ion-footer-bar align-title="left" class="bar-balanced footer-md">
+  <span class="title">Total: {{entity.total|currency:'R$'}}</span>
+  <div class="buttons" ng-click="doSomething()">
+    <button class="button button-dark">Fechar pedido</button>
+  </div>
+</ion-footer-bar>
 </ion-view>

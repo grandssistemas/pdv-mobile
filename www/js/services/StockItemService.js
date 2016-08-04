@@ -11,7 +11,6 @@ angular.module('app.core')
   this.getByProductType = getByProductType;
 
   function getByName(name){
-    console.log(name)
     query.params = defaultParams;
     query.params.q = name;
     query.params.searchFields = 'item.name';
@@ -23,5 +22,4 @@ angular.module('app.core')
     query.params.aq = 'obj.item.product.productType.id = ' + productTypeId;
     return BaseService.get(url,query);
   }
-
 })

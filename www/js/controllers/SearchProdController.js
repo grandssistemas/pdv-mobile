@@ -29,7 +29,6 @@ angular.module('app.core')
   $scope.search = function(event,value){
     $scope.place = null;
     if(event.keyCode === 13) {
-      console.log(value)
       StockItemService.getByName(value).then(setStockItens);
       $cordovaKeyboard.close()
       event.preventDefault();
@@ -45,7 +44,6 @@ angular.module('app.core')
       }
       return a;
     },[]);
-    console.log($scope.products)
   }
 
   function getBase(){

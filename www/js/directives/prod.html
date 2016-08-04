@@ -1,6 +1,6 @@
   <div class="row">
     <div class="img-responsive">
-      <img src="/img.png" ng-src="data:image/png;base64,{{product.item.logo.bytes}}"
+      <img ng-src="data:image/png;base64,{{product.item.logo.bytes}}"
         ng-if="product.item.logo.bytes" class="img-product-list"/>
       <img src="/img/padrao.gif" ng-if="!product.item.logo.bytes" alt="teste"
         class="img-product-list"/>

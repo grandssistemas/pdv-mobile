@@ -1,8 +1,8 @@
 
 angular.module('app.core')
-  .directive('grandsProduct',function(){
+  .directive('grandsCountButtons',function(){
     return {
-      templateUrl: '/js/directives/prod.html',
+      templateUrl: '/js/directives/countButton.html',
       restrict: 'E',
       scope: {
         product: '=',

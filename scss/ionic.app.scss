@@ -12,7 +12,7 @@ $balanced:                        #18a689 !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
-$dark:                            #444 !default;
+$dark:                            #333333 !default;
 */
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -43,10 +43,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   padding-top: 2px!important;
 }
 
-.list-no-style>.item{
+.list-no-style > div > .item,
+.list-no-style > .item{
   border: none;
   padding: 8px;
 }
+
 
 .list-no-style{
   border: none;
@@ -61,6 +63,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   max-height: 100%;
 }
 
+.list-no-style .item-content{
+    padding: 0;
+}
+
+.icon-list-option{
+  text-align: center;
+  width: 100%;
+}
+
 .full-width{
   max-width: 100%;
 }
@@ -69,6 +80,13 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-size: 16px;
 }
 
+.n-p{
+  padding: 0!important;
+}
+
+.m-t{
+  margin-top: 15px!important;
+}
 
 /* Extra small devices */
 @media (max-width: 768px) {
@@ -81,6 +99,23 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @media (min-width: 768px) and (max-width: 992px) {
   .img-responsive {
     height: 350px
+  }
+
+  .footer-md{
+    height: 88px!important;
+  }
+
+  .footer-md .title{
+    height: 86px!important;
+    line-height: 88px!important;
+    text-align: left!important;
+    vertical-align: middle!important;
+    font-size: 46px!important;
+  }
+
+  .footer-md .button{
+    font-size: 23px;
+    max-width: 150px
   }
 }
 
