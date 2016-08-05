@@ -1,10 +1,24 @@
 angular.module('app.core')
-.controller('SearchProdController',function($scope,CategoryService,StockItemService,$cordovaKeyboard){
+.controller('SearchProdController',function($scope,ShoppingCartService,$ionicPopover,CategoryService,StockItemService,$cordovaKeyboard){
   $scope.place = null;
+
+  $ionicPopover.fromTemplateUrl('add-cart.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
   getBase();
 
   $scope.getChildren = getChildren;
+
+  $scope.addCart = function(item,$event){
+    console.log(item)
+    var cost = item.item.productInternalBarCodes[0].costValue;
+    var value = item.item.productInternalBarCodes[0].saleValue;
+    ShoppingCartService.addItem({item:item,count:1,costValue:cost,saleValue:value,soldValue:value});
+    $scope.popover.show($event);
+  }
 
   $scope.getFather = function(value){
     $scope.products = null;

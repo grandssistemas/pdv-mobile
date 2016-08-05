@@ -5,8 +5,23 @@ angular.module('app.core')
       templateUrl: '/js/directives/countButton.html',
       restrict: 'E',
       scope: {
-        product: '=',
-        $first: '=first'
+        count: '=',
+        afterClick: '&?'
+      },
+      link: function(scope){
+        scope.count = scope.count || 0;
+
+        scope.add = function(){
+          scope.count++;
+          scope.afterClick();
+        }
+
+        scope.sub = function(){
+          if(scope.count > 0){
+            scope.count--;
+            scope.afterClick();
+          }
+        }
       }
     }
   })

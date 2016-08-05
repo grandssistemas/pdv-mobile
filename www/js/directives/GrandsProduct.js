@@ -6,7 +6,8 @@ angular.module('app.core')
       restrict: 'E',
       scope: {
         product: '=',
-        $first: '=first'
+        $first: '=first',
+        addCart: '&'
       }
     }
   })

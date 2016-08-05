@@ -30,10 +30,8 @@
           </div>
         </div>
         <div class="row n-p">
-          <div class="col col-60">
-            <b>
-              Qtd.:  {{item.count}}
-            </b>
+          <div class="col col-30 n-p">
+            <grands-count-buttons after-click="attTotal()" count="item.count"></grands-count-buttons>
           </div>
           <div class="col text-right">
             <b class="positive">
@@ -41,17 +39,7 @@
             </b>
           </div>
         </div>
-
-        <!-- <ion-option-button class="button-balanced button-clear icon-center"
-                           ng-click="share(item)">
-                           <i class="icon ion-plus icon-list-option"></i>
-        </ion-option-button>
-        <ion-option-button class="button-assertive button-clear"
-                           ng-click="share(item)">
-          <i class="icon ion-minus icon-list-option"></i>
-        </ion-option-button> -->
-        <ion-option-button class="button-assertive "
-                           ng-click="edit(item)">
+        <ion-option-button class="button-assertive" ng-click="remove($index)">
                            <i class="icon ion-trash-a icon-list-option"></i>
         </ion-option-button>
 		  </ion-item>
