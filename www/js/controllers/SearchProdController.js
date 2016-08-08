@@ -1,12 +1,21 @@
 angular.module('app.core')
-.controller('SearchProdController',function($scope,ShoppingCartService,$ionicPopover,
-                                            CategoryService,StockItemService,$cordovaKeyboard,
-                                            $stateParams){
+.controller('SearchProdController',function($scope,
+  ShoppingCartService,
+  $ionicPopover,
+  CategoryService,
+  StockItemService,
+  $cordovaKeyboard,
+  $stateParams,
+  $ionicPlatform,
+  $cordovaBarcodeScanner,
+  ProductInternalBarcodeService){
+
+  var barcodeOpen = false;
   $scope.place = null;
   $scope.showTree = true;
 
   $scope.getChildren = getChildren;
-  $scope.addCart = function(item,$event){
+  $scope.addCart = function(item){
     var cost = item.item.productInternalBarCodes[0].costValue;
     var value = item.item.productInternalBarCodes[0].saleValue;
     ShoppingCartService.addItem({item:item,count:1,costValue:cost,saleValue:value,soldValue:value});
@@ -38,6 +47,17 @@ angular.module('app.core')
       event.preventDefault();
     }
   };
+  $scope.openBarcode = function(){
+    if(!barcodeOpen){
+      barcodeOpen = true;
+      $ionicPlatform.ready(function() {
+        $cordovaBarcodeScanner.scan().then(searchByBarcode, function(error) {
+              barcodeOpen = false;
+              alert(JSON.stringify(error));
+            });
+      })
+    }
+  }
 
   function setStockItens(response){
     $scope.products = response.data.values.reduce(function(a,b,index){
@@ -58,8 +78,8 @@ angular.module('app.core')
 
   function getBase(){
     $scope.products = null;
-    $scope.place = null;
-    $scope.showTree = true;
+    resetSearch();
+
     CategoryService.getTree().then(function(response){
       $scope.values = [{
         name: 'Departamentos',
@@ -79,6 +99,14 @@ angular.module('app.core')
       $scope.values = [item];
       StockItemService.getByProductType(item.id).then(setStockItens);
     }
+  }
+
+  function searchByBarcode(response){
+    barcodeOpen = false;
+    ProductInternalBarcodeService.getByBarcode(response.text).then(function(data){
+      alert(data.data)
+      $scope.addCart(data.data);
+    })
   }
 
 

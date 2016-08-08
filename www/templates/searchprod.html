@@ -17,7 +17,8 @@
       <button class="button button-small button-balanced"
       ng-class="{'button-outline': place != 'PRODUCTTYPE'}"
       ng-click="getLevel('PRODUCTTYPE')">Tipo de Produtos</button>
-      <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"></button>
+      <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"
+      ng-click="openBarcode()"></button>
     </div>
     <div ng-show="showTree">
       <div ng-repeat="item in values">
