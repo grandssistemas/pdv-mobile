@@ -11,8 +11,8 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
     }
   });
 })
-.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider) {
-
+.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider,$ionicConfigProvider) {
+  $ionicConfigProvider.backButton.text('').previousTitleText(false);
   $stateProvider.state('sale', {
     url: '/sale',
     templateUrl: '../templates/sale.html',
@@ -21,7 +21,11 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
   $stateProvider.state('searchprod', {
     url: '/searchprod',
     templateUrl: 'templates/searchprod.html',
-    controller: 'SearchProdController'
+    controller: 'SearchProdController',
+    params: {
+      value: null,
+      level: null
+    }
   });
 
   $stateProvider.state('billing', {
@@ -34,8 +38,6 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
 
   localStorageServiceProvider
     .setPrefix('fashionmanager-pdv');
-
-
     var countLoader = 0, countSuccessMessage = 0;
     $httpProvider.interceptors.push(function () {
         return {

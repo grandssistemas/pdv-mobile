@@ -9829,6 +9829,7 @@ a.button {
   font-size: 30px !important; }
 
 .icon-without-button {
+  text-decoration: none;
   padding-right: 5px !important;
   padding-top: 2px !important; }
 
@@ -9864,8 +9865,14 @@ a.button {
 .n-p {
   padding: 0 !important; }
 
+.no-min-height {
+  min-height: 0 !important; }
+
 .m-t {
   margin-top: 15px !important; }
+
+.n-m-b {
+  margin-bottom: 0 !important; }
 
 /* Extra small devices */
 @media (max-width: 768px) {

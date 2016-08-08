@@ -1,6 +1,6 @@
 <ion-view view-title="Pedido de Venda">
   <ion-nav-buttons side="right">
-        <a class="icon fa fa-shopping-cart  icon-without-button ion-lg" style="color:#fff" href="#/sale"></a>
+        <a class="icon fa fa-shopping-cart icon-without-button ion-lg" style="color:#fff" href="#/sale"></a>
     </ion-nav-buttons>
   <ion-content class="padding has-header">
     <div class="item-input-inset">
@@ -19,7 +19,7 @@
       ng-click="getLevel('PRODUCTTYPE')">Tipo de Produtos</button>
       <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"></button>
     </div>
-    <div ng-hide="products">
+    <div ng-show="showTree">
       <div ng-repeat="item in values">
         <div ng-class="{'text-center':!item.categoryType}">
           <button class="button button-clear button-stable" ng-click="getFather(item)">
@@ -44,12 +44,3 @@
     </div>
   </ion-content>
 </ion-view>
-
-
-<script id="add-cart.html" type="text/ng-template">
-  <ion-popover-view style="height: 100px;">
-    <ion-content>
-      <h1>Produto foi adicionado à lista</h1>
-    </ion-content>
-  </ion-popover-view>
-</script>
