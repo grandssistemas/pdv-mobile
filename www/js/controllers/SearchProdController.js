@@ -8,7 +8,9 @@ angular.module('app.core')
   $stateParams,
   $ionicPlatform,
   $cordovaBarcodeScanner,
-  ProductInternalBarcodeService){
+  ProductInternalBarcodeService,
+  $state,
+  $cordovaVibration){
 
   var barcodeOpen = false;
   $scope.place = null;
@@ -42,6 +44,7 @@ angular.module('app.core')
     $scope.place = null;
     if(event.keyCode === 13) {
       $scope.showTree = false;
+      console.log(value)
       StockItemService.getByName(value).then(setStockItens);
       $cordovaKeyboard.close();
       event.preventDefault();
@@ -53,10 +56,13 @@ angular.module('app.core')
       $ionicPlatform.ready(function() {
         $cordovaBarcodeScanner.scan().then(searchByBarcode, function(error) {
               barcodeOpen = false;
-              alert(JSON.stringify(error));
             });
       })
     }
+  }
+
+  $scope.changeState = function(){
+    $state.go('sale');
   }
 
   function setStockItens(response){
@@ -103,8 +109,8 @@ angular.module('app.core')
 
   function searchByBarcode(response){
     barcodeOpen = false;
+    $cordovaVibration.vibrate(100);
     ProductInternalBarcodeService.getByBarcode(response.text).then(function(data){
-      alert(data.data)
       $scope.addCart(data.data);
     })
   }

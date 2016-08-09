@@ -15,7 +15,7 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
   $ionicConfigProvider.backButton.text('').previousTitleText(false);
   $stateProvider.state('sale', {
     url: '/sale',
-    templateUrl: '../templates/sale.html',
+    templateUrl: 'templates/sale.html',
     controller: 'SaleController'
   });
   $stateProvider.state('searchprod', {
