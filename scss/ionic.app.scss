@@ -4,16 +4,16 @@ in ionic's _variables.scss file.
 
 For example, you might change some of the default colors:
 
+*/
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
 $calm:                            #11c1f3 !default;
 $balanced:                        #18a689 !default;
-$energized:                       #ffc900 !default;
+$energized:                       #ff7920 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #333333 !default;
-*/
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -95,6 +95,35 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .n-m-b{
   margin-bottom: 0!important;
+}
+
+.n-m-t{
+  margin-top: 0!important;
+}
+
+.n-p-l{
+  padding-left: 0!important;
+}
+
+.font-h1{
+  font-size: 36px!important;
+}
+
+.input{
+  width: 100%;
+  height: 1.2em!important;
+}
+
+.input-balanced{
+  color: $balanced!important;;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.title-balanced{
+  color: #18a689!important;
 }
 
 /* Extra small devices */

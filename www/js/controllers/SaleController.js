@@ -7,12 +7,39 @@ angular.module('app.core')
   ProductInternalBarcodeService,
   $ionicPlatform,
   $cordovaBarcodeScanner,
-  $cordovaVibration){
+  $cordovaVibration,
+  PersonService,
+  PaymentTypeService,
+  OperationTypeService,
+  MovementGroupService,
+  $timeout){
 
-  var barcodeOpen = false;
+  var barcodeOpen = false,
+    paymentType,
+    operationType,
+    responsable;
+
+  PersonService.getByCpf('00000000000').then(function(data){
+    responsable = data.data.values[0];
+  });
+
+  PaymentTypeService.getByName('Real').then(function(data){
+    paymentType = data.data.values[0];
+  });
+
+  OperationTypeService.getByName('Venda Simples').then(function(data){
+    operationType = data.data.values[0];
+  });
+
+
   $scope.attTotal = attTotal;
   $scope.entity = {
-    movements:ShoppingCartService.get()
+    movements:ShoppingCartService.get(),
+    movementDate: new Date(),
+    status: 'OPEN',
+    nfeList: [],
+    homeDelivery: false,
+    accountMovements: []
   }
 
   $scope.getLevel = function(level){
@@ -40,15 +67,37 @@ angular.module('app.core')
     }
   };
   $scope.save = function(entity){
-    console.log(entity);
+    entity = angular.copy(entity);
+    entity.entries = [{value:entity.total,paymentType:paymentType}];
+    entity.parcels = [];
+    entity.responsable = responsable;
+    entity.operationType = operationType;
+    entity.count = entity.movements.length;
+    entity.subTotal = entity.total *= -1;
+    entity.discount = 0;
+    entity.movements = entity.movements.map(parseMovement);
+    MovementGroupService.save(entity).then(save)
   }
 
   attTotal();
 
+  function save(response){
+    $state.go('menu.resultsale',{id:response.data.data.id});
+  }
+
+  function parseMovement(mov){
+    mov.count *= -1;
+    mov.value = [];
+    mov.movementType = -1;
+    return mov;
+  }
+
   function attTotal(){
-    $scope.entity.total = $scope.entity.movements.reduce(function(a,b){
-      return a+(b.count*b.saleValue);
-    },0) || 0;
+    $timeout(function(){
+      $scope.entity.total = $scope.entity.movements.reduce(function(a,b){
+        return a+(b.count*b.saleValue);
+      },0) || 0;
+    })
   }
 
   function searchByBarcode(response){
@@ -77,6 +126,6 @@ angular.module('app.core')
   }
 
   function changeRoute(params){
-    $state.go('searchprod',params)
+    $state.go('menu.searchprod',params)
   }
 })

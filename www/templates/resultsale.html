@@ -1,0 +1,16 @@
+<ion-view view-title="Pedido de Venda">
+  <ion-content class="padding has-header">
+    <div style="vertical-align:middle;text-align:center">
+      <h4 class="balanced">CÓDIGO DO PEDIDO</h4>
+      <h1>{{entity.id}}</h1>
+      <div class="row">
+        <div class="col">
+          <button type="button" class="button button-balanced" ng-click="newSale()">Nova Venda</button>
+        </div>
+        <div class="col">
+          <button type="button" class="button button-energized" ui-sref="menu.billing({id:entity.id})">Faturamento</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

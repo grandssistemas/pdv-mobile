@@ -1,6 +1,6 @@
 angular.module('app.core')
 .service('StockItemService', function(BaseService,route){
-  var url = route.concat('/stockitem');
+  var url = route.concat('/api/stockitem');
   var query = {};
 
   this.getByName = getByName;

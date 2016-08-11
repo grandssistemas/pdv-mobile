@@ -1,6 +1,6 @@
 angular.module('app.core')
 .service('CategoryService', function(BaseService,route){
-  var url = route.concat('/category');
+  var url = route.concat('/api/category');
 
   this.getTree = getTree;
   this.getChildren = getChildren;
@@ -13,7 +13,7 @@ angular.module('app.core')
     }
     return BaseService.get(url.concat('/tree'));
   }
-  
+
   function getChildren(data){
     if(data){
       return BaseService.get(url.concat('/tree/childrens/').concat(data.categoryType).concat('/').concat(data.id));

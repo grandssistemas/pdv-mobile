@@ -1,6 +1,6 @@
 angular.module('app.core')
 .service('ProductInternalBarcodeService', function(BaseService,route){
-  var url = route.concat('/productinternalbarcode')
+  var url = route.concat('/api/productinternalbarcode')
   this.getByBarcode = getByBarcode;
 
   function getByBarcode(barcode){

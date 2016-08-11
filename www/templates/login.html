@@ -1,0 +1,18 @@
+<ion-view title="Fashion Manager">
+  <ion-content class="has-header" padding="true">
+    <form class="list">
+      <ion-list >
+        <label class="item item-input ">
+          <span class="input-label">Usuário</span>
+          <input type="text" ng-model="entity.email">
+        </label>
+        <label class="item item-input ">
+          <span class="input-label">Senha</span>
+          <input type="password" ng-model="entity.password">
+        </label>
+      </ion-list>
+      <div style="height: 40px;" class="spacer"></div>
+      <button class=" button button-balanced button-block" ng-click="doLogin(entity)">Entrar</button>
+    </form>
+  </ion-content>
+</ion-view>

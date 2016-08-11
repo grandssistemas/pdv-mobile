@@ -10,7 +10,9 @@ angular.module('app.core')
   $cordovaBarcodeScanner,
   ProductInternalBarcodeService,
   $state,
-  $cordovaVibration){
+  $cordovaVibration,
+  $cordovaToast){
+    console.log('aki')
 
   var barcodeOpen = false;
   $scope.place = null;
@@ -20,6 +22,7 @@ angular.module('app.core')
   $scope.addCart = function(item){
     var cost = item.item.productInternalBarCodes[0].costValue;
     var value = item.item.productInternalBarCodes[0].saleValue;
+    $cordovaToast.showShortTop('Adicionado na lista');
     ShoppingCartService.addItem({item:item,count:1,costValue:cost,saleValue:value,soldValue:value});
   };
   $scope.getFather = function(value){
@@ -44,7 +47,6 @@ angular.module('app.core')
     $scope.place = null;
     if(event.keyCode === 13) {
       $scope.showTree = false;
-      console.log(value)
       StockItemService.getByName(value).then(setStockItens);
       $cordovaKeyboard.close();
       event.preventDefault();
@@ -62,7 +64,7 @@ angular.module('app.core')
   }
 
   $scope.changeState = function(){
-    $state.go('sale');
+    $state.go('menu.sale');
   }
 
   function setStockItens(response){

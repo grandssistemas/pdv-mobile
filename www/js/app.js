@@ -1,5 +1,8 @@
 
-angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
+angular.module('app.core', ['ionic',
+'LocalStorageModule',
+'ngCordova',
+'ui.utils.masks'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -13,12 +16,17 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
 })
 .config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider,$ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('').previousTitleText(false);
-  $stateProvider.state('sale', {
+  $stateProvider.state('menu', {
+    url: '/menu',
+    templateUrl: 'templates/menu.html',
+    abstract:true
+  })
+  $stateProvider.state('menu.sale', {
     url: '/sale',
     templateUrl: 'templates/sale.html',
     controller: 'SaleController'
   });
-  $stateProvider.state('searchprod', {
+  $stateProvider.state('menu.searchprod', {
     url: '/searchprod',
     templateUrl: 'templates/searchprod.html',
     controller: 'SearchProdController',
@@ -27,14 +35,39 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
       level: null
     }
   });
-
-  $stateProvider.state('billing', {
-    url: '/billing',
+  $stateProvider.state('menu.resultsale', {
+    url: '/sale/:id',
+    templateUrl: 'templates/resultsale.html',
+    controller: 'ResultSaleController',
+    resolve: {
+        entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
+            var url = route.concat('/movementgroup/').concat($stateParams.id);
+            return $http.get(url).then(function(data){
+              return data.data;
+            });
+        }]
+    }
+  });
+  $stateProvider.state('menu.billing', {
+    url: '/billing/:id',
     templateUrl: 'templates/billing.html',
-    controller: 'BillingController'
+    controller: 'BillingController',
+    resolve: {
+        entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
+            var url = route.concat('/movementgroup/').concat($stateParams.id);
+            return $http.get(url).then(function(data){
+              return data.data;
+            });
+        }]
+    }
+  });
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginController'
   });
 
-  $urlRouterProvider.otherwise('/searchprod');
+  $urlRouterProvider.otherwise('/login');
 
   localStorageServiceProvider
     .setPrefix('fashionmanager-pdv');
@@ -47,4 +80,4 @@ angular.module('app.core', ['ionic','LocalStorageModule','ngCordova'])
             }
         };
     })
-}).value('route','http://192.168.25.179:8084/fashionmanager-api/api')
+}).value('route','http://192.168.25.179:8084/fashionmanager-api')
