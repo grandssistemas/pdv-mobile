@@ -12,8 +12,6 @@ angular.module('app.core')
   $state,
   $cordovaVibration,
   $cordovaToast){
-    console.log('aki')
-
   var barcodeOpen = false;
   $scope.place = null;
   $scope.showTree = true;

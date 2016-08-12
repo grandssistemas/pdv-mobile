@@ -14,7 +14,11 @@ angular.module('app.core', ['ionic',
     }
   });
 })
-.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider,$ionicConfigProvider) {
+.config(function($stateProvider,
+  $urlRouterProvider,
+  localStorageServiceProvider,
+  $httpProvider,
+  $ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('').previousTitleText(false);
   $stateProvider.state('menu', {
     url: '/menu',
@@ -69,15 +73,23 @@ angular.module('app.core', ['ionic',
 
   $urlRouterProvider.otherwise('/login');
 
-  localStorageServiceProvider
-    .setPrefix('fashionmanager-pdv');
-    var countLoader = 0, countSuccessMessage = 0;
-    $httpProvider.interceptors.push(function () {
-        return {
-            'request': function (config) {
-                config.headers['gumgaToken'] = 'PDVMOBILE';
-                return config;
+  localStorageServiceProvider.setPrefix('fashionmanager-pdv');
+
+
+  var countLoader = 0,
+  countSuccessMessage = 0
+  $httpProvider.interceptors.push(function ($injector,localStorageService) {
+      return {
+          'request': function (config) {
+              config.headers['gumgaToken'] = localStorageService.get('token');
+              return config;
+          },
+          'responseError': function (rejection) {
+            if (rejection.status === 403) {
+                var state = $injector.get('$state');
+                state.go('login');
             }
-        };
-    })
+          }
+      };
+  })
 }).value('route','http://192.168.25.179:8084/fashionmanager-api')

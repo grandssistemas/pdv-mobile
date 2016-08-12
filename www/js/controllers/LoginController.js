@@ -1,9 +1,14 @@
 angular.module('app.core')
-.controller('LoginController',function($scope,$state,LoginService){
+.controller('LoginController',function($scope,
+  $state,
+  LoginService,
+  $cordovaToast){
+  LoginService.removeToken();
   $scope.doLogin = function(entity){
     LoginService.setToken(entity.email,entity.password).then(function(data){
-      console.log(data);
       $state.go('menu.searchprod');
+    },function(data){
+      $cordovaToast.showShortTop('Login ou senha incorreto.');
     })
   }
 })
