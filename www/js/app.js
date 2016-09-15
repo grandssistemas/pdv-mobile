@@ -45,7 +45,7 @@ angular.module('app.core', ['ionic',
     controller: 'ResultSaleController',
     resolve: {
         entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
-            var url = route.concat('/movementgroup/').concat($stateParams.id);
+            var url = route.concat('/api/movementgroup/').concat($stateParams.id);
             return $http.get(url).then(function(data){
               return data.data;
             });
@@ -58,7 +58,7 @@ angular.module('app.core', ['ionic',
     controller: 'BillingController',
     resolve: {
         entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
-            var url = route.concat('/movementgroup/').concat($stateParams.id);
+            var url = route.concat('/api/movementgroup/').concat($stateParams.id);
             return $http.get(url).then(function(data){
               return data.data;
             });
