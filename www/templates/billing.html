@@ -35,7 +35,7 @@
             <h5>Débito</h5>
           </div>
 				</div>
-        <div ng-show="paymentType != null">
+        <div ng-show="paymentType != null && paymentType != ''">
           <h5>Valor Pago</h5>
           <label class="item item-input n-p-l">
             <input type="tel" name="discount" class="font-h1 input" ng-model="entity.entries[0].value" ui-money-mask>
@@ -44,7 +44,7 @@
             <h5>Troco</h5>
             <h1 class="n-m-t balanced">{{entity.change|currency:'R$ '}}</h1>
           </div>
-          <button class="button button-energized button-block" ng-click="update(entity)">Faturar</button>
+          <button class="button button-energized button-block" ng-click="update(entity, paymentType)">Faturar</button>
         </div>
     </ion-content>
 </ion-view>
