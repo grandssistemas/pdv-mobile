@@ -1,5 +1,50 @@
-<ion-view view-title="Venda">
-	<ion-content>
-    <h1>Faturamento</h1>
-  </ion-content>
+<ion-view title="Faturamento">
+    <ion-content class="has-header" padding="true">
+				<h5>Subtotal</h5>
+				<h1 class="n-m-t balanced">{{entity.subTotal|currency:'R$ '}}</h1>
+				<h5>Desconto</h5>
+        <label class="item item-input n-p-l">
+          <input type="tel" class="font-h1 input" ng-pattern="[0-9]*" ng-model="entity.discount" inputmode="numeric" ui-money-mask>
+        </label>
+        <h5>Total</h5>
+				<h1 class="n-m-t balanced">{{entity.total|currency:'R$ '}}</h1>
+        <h5>Formas de Pagamento</h5>
+				<div class="row text-center">
+          <div class="col">
+            <a class="button button-clear"
+            ng-class="{'button-balanced':paymentType === 'Real','button-dark':paymentType !== 'Real'}"
+            ng-click="paymentType = 'Real'">
+              <i class="fa fa-money fa-3x"></i>
+            </a>
+            <h5>Real</h5>
+          </div>
+          <div class="col">
+            <a class="button button-clear"
+              ng-class="{'button-balanced':paymentType === 'Cartão de Crédito','button-dark':paymentType !== 'Cartão de Crédito'}"
+              ng-click="paymentType = 'Cartão de Crédito'">
+              <i class="fa fa-credit-card-alt fa-3x"></i>
+            </a>
+            <h5>Crédito</h5>
+          </div>
+          <div class="col">
+            <a class="button button-clear"
+              ng-class="{'button-balanced':paymentType === 'Cartão de Débito','button-dark':paymentType !== 'Cartão de Débito'}"
+              ng-click="paymentType = 'Cartão de Débito'">
+              <i class="fa fa-credit-card fa-3x"></i>
+            </a>
+            <h5>Débito</h5>
+          </div>
+				</div>
+        <div ng-show="paymentType != null && paymentType != ''">
+          <h5>Valor Pago</h5>
+          <label class="item item-input n-p-l">
+            <input type="tel" name="discount" class="font-h1 input" ng-model="entity.entries[0].value" ui-money-mask>
+          </label>
+          <div ng-show="paymentType === 'Real'">
+            <h5>Troco</h5>
+            <h1 class="n-m-t balanced">{{entity.change|currency:'R$ '}}</h1>
+          </div>
+          <button class="button button-energized button-block" ng-click="update(entity, paymentType)">Faturar</button>
+        </div>
+    </ion-content>
 </ion-view>

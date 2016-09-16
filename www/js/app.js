@@ -1,9 +1,12 @@
 
-angular.module('app.core', ['ionic','LocalStorageModule'])
+angular.module('app.core', ['ionic',
+'LocalStorageModule',
+'ngCordova',
+'ui.utils.masks'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(true);
     }
     if(window.StatusBar) {
@@ -11,38 +14,82 @@ angular.module('app.core', ['ionic','LocalStorageModule'])
     }
   });
 })
-.config(function($stateProvider,$urlRouterProvider,localStorageServiceProvider,$httpProvider) {
-
-  $stateProvider.state('sale', {
+.config(function($stateProvider,
+  $urlRouterProvider,
+  localStorageServiceProvider,
+  $httpProvider,
+  $ionicConfigProvider) {
+  $ionicConfigProvider.backButton.text('').previousTitleText(false);
+  $stateProvider.state('menu', {
+    url: '/menu',
+    templateUrl: 'templates/menu.html',
+    abstract:true
+  })
+  $stateProvider.state('menu.sale', {
     url: '/sale',
-    templateUrl: '../templates/sale.html',
+    templateUrl: 'templates/sale.html',
     controller: 'SaleController'
   });
-  $stateProvider.state('searchprod', {
+  $stateProvider.state('menu.searchprod', {
     url: '/searchprod',
     templateUrl: 'templates/searchprod.html',
-    controller: 'SearchProdController'
+    controller: 'SearchProdController',
+    params: {
+      value: null,
+      level: null
+    }
   });
-
-  $stateProvider.state('billing', {
-    url: '/billing',
+  $stateProvider.state('menu.resultsale', {
+    url: '/sale/:id',
+    templateUrl: 'templates/resultsale.html',
+    controller: 'ResultSaleController',
+    resolve: {
+        entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
+            var url = route.concat('/api/movementgroup/').concat($stateParams.id);
+            return $http.get(url).then(function(data){
+              return data.data;
+            });
+        }]
+    }
+  });
+  $stateProvider.state('menu.billing', {
+    url: '/billing/:id',
     templateUrl: 'templates/billing.html',
-    controller: 'BillingController'
+    controller: 'BillingController',
+    resolve: {
+        entity: ['$stateParams', '$http','route', function ($stateParams, $http,route) {
+            var url = route.concat('/api/movementgroup/').concat($stateParams.id);
+            return $http.get(url).then(function(data){
+              return data.data;
+            });
+        }]
+    }
+  });
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginController'
   });
 
-  $urlRouterProvider.otherwise('/searchprod');
+  $urlRouterProvider.otherwise('/login');
 
-  localStorageServiceProvider
-    .setPrefix('fashionmanager-pdv');
+  localStorageServiceProvider.setPrefix('fashionmanager-pdv');
 
 
-    var countLoader = 0, countSuccessMessage = 0;
-    $httpProvider.interceptors.push(function () {
-        return {
-            'request': function (config) {
-                config.headers['gumgaToken'] = 'PDVMOBILE';
-                return config;
+  var countLoader = 0,
+  countSuccessMessage = 0
+  $httpProvider.interceptors.push(function ($injector,localStorageService) {
+      return {
+          'request': function (config) {
+              config.headers['gumgaToken'] = localStorageService.get('token');
+              return config;
+          },
+          'responseError': function (rejection) {
+            if (rejection.status === 403) {
+                var state = $injector.get('$state');
+                state.go('login');
             }
-        };
-    })
-})
+          }
+      };
+  })
+}).value('route','http://192.168.25.179:8084/fashionmanager-api')

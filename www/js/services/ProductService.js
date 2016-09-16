@@ -1,3 +1,6 @@
 angular.module('app.core')
-.service('ProductService', function($http,BaseService){
+.service('StockItemService', function(BaseService,route){
+  var url = route.concat('/stockitem');
+
+
 })
