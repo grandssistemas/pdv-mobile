@@ -9888,9 +9888,52 @@ a.button {
   color: #18a689 !important; }
 
 /* Extra small devices */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .img-responsive {
     height: 150px; } }
+
+@media (min-width: 601px) and (max-width: 767px) {
+  .img-responsive {
+    height: 350px !important; }
+  .footer-md {
+    height: 88px !important; }
+  .footer-md .title {
+    height: 86px !important;
+    line-height: 88px !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+    font-size: 46px !important; }
+  .footer-md .button {
+    font-size: 20px !important;
+    max-width: 150px !important; }
+  .bar-header {
+    height: 60px !important; }
+  .bar-balanced .button.button-clear {
+    font-size: 32px !important; }
+  .bar .button.button-clear, .bar button.button-clear {
+    padding-right: 2px;
+    padding-left: 2px;
+    font-weight: 300;
+    font-size: 17px;
+    height: 50px;
+    width: 50px; }
+  .bar .title {
+    font-size: 43px !important;
+    height: 58px !important;
+    margin-top: 7px !important; }
+  .ion-lg {
+    font-size: 43px !important; }
+  .icon-without-button {
+    padding-top: 0px !important; }
+  .input {
+    font-size: 25px !important; }
+  .title + .buttons {
+    position: absolute !important;
+    top: 0px !important;
+    right: 5px !important;
+    bottom: 0px !important; }
+  .scroll-content {
+    margin-top: 12px !important; } }
 
 /* Small devices */
 @media (min-width: 768px) and (max-width: 992px) {
