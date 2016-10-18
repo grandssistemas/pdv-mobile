@@ -11,7 +11,7 @@
         <h5>Formas de Pagamento</h5>
 				<div class="row text-center">
           <div class="col">
-            <a class="button button-clear"
+            <a class="button button-clear button-icon"
             ng-class="{'button-balanced':paymentType === 'Real','button-dark':paymentType !== 'Real'}"
             ng-click="paymentType = 'Real'">
               <i class="fa fa-money fa-3x"></i>
@@ -19,7 +19,7 @@
             <h5>Real</h5>
           </div>
           <div class="col">
-            <a class="button button-clear"
+            <a class="button button-clear button-icon"
               ng-class="{'button-balanced':paymentType === 'Cartão de Crédito','button-dark':paymentType !== 'Cartão de Crédito'}"
               ng-click="paymentType = 'Cartão de Crédito'">
               <i class="fa fa-credit-card-alt fa-3x"></i>
@@ -27,7 +27,7 @@
             <h5>Crédito</h5>
           </div>
           <div class="col">
-            <a class="button button-clear"
+            <a class="button button-clear button-icon"
               ng-class="{'button-balanced':paymentType === 'Cartão de Débito','button-dark':paymentType !== 'Cartão de Débito'}"
               ng-click="paymentType = 'Cartão de Débito'">
               <i class="fa fa-credit-card fa-3x"></i>
@@ -35,7 +35,7 @@
             <h5>Débito</h5>
           </div>
 				</div>
-        <div ng-show="paymentType != null && paymentType != ''">
+        <div ng-show="paymentType != null && paymentType != ''" class="after-icons">
           <h5>Valor Pago</h5>
           <label class="item item-input n-p-l">
             <input type="tel" name="discount" class="font-h1 input" ng-model="entity.entries[0].value" ui-money-mask>
@@ -44,7 +44,10 @@
             <h5>Troco</h5>
             <h1 class="n-m-t balanced">{{entity.change|currency:'R$ '}}</h1>
           </div>
-          <button class="button button-energized button-block" ng-click="update(entity, paymentType)">Faturar</button>
+          <button class="button button-energized button-block" ng-show="status != 'FINISH'" ng-click="update(entity, paymentType)">Faturar</button>
+          <button class="button button-energized button-block" ng-hide="status != 'FINISH'" ng-click="print(entity)">Imprimir e
+            Sair</button>
+          <button class="button button-balanced button-block" ng-hide="status != 'FINISH'" ui-sref="menu.searchprod">Sair</button>
         </div>
     </ion-content>
 </ion-view>

@@ -82,7 +82,7 @@ angular.module('app.core')
   attTotal();
 
   function save(response){
-    $state.go('menu.resultsale',{id:response.data.data.id});
+    $state.go('menu.billing',{id:response.data.data.id});
   }
 
   function parseMovement(mov){

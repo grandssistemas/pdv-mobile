@@ -133,6 +133,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
 }
 
+
+// Poynt
 @media (min-width: 601px) and (max-width: 767px) {
   .img-responsive {
     height: 250px!important;
@@ -245,6 +247,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     font-size: 45px!important;
   }
 
+  .button.button-balanced.button-clear.button-icon {
+    height: 110px!important;
+    max-height: 110px;
+  }
+
   .item p {
     font-size: 18px!important;
   }
@@ -284,6 +291,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
   .button.button-balanced {
     height: 40px!important;
+  }
+
+  .after-icons{
+    margin-top: -35px!important;
   }
 }
 

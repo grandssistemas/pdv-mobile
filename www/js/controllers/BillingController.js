@@ -10,6 +10,7 @@ angular.module('app.core')
   $timeout){
   $scope.entity = entity;
   $scope.paymentType = '';
+  $scope.status = $scope.entity.status;
   var paymentTypes;
   initializeEntity($scope.entity);
 
@@ -39,6 +40,18 @@ angular.module('app.core')
   })
 
   $scope.update = update;
+  $scope.print = print;
+
+
+  function print(entity){
+    MovementGroupService.print(entity).then(function (data){
+      PoyntPrinter.print(entity.id,data.data, function(data){
+        $state.go('menu.searchprod');
+      },function(err){
+        $cordovaToast.showShortTop('Erro na impressão.');
+      });
+    })
+  }
 
   function update(entity, paymentType){
     entity = angular.copy(entity);
@@ -104,15 +117,16 @@ angular.module('app.core')
 
   function doMovement(entity){
     MovementGroupService.billing(entity).then(function(data){
+      $scope.status = data.data.data.status;
       ShoppingCartService.setShoppingCart([]);
       $cordovaToast.showShortTop('Venda concluida.');
-      $state.go('menu.searchprod');
+      // $state.go('menu.searchprod');
     })
   }
 
   function getPaymentType(paymentType){
     return paymentTypes.reduce(function(a,b){
-      if(b.name.indexOf(paymentType)){
+      if(b.name.indexOf(paymentType) != -1){
         return b;
       }
       return a;

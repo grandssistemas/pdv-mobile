@@ -20,8 +20,13 @@ angular.module('app.core')
   $scope.addCart = function(item){
     var cost = item.item.productInternalBarCodes[0].costValue;
     var value = item.item.productInternalBarCodes[0].saleValue;
-    $cordovaToast.showShortTop('Adicionado na lista');
-    ShoppingCartService.addItem({item:item,count:1,costValue:cost,saleValue:value,soldValue:value});
+
+    if(item.count > 0){
+      $cordovaToast.showShortTop('Adicionado na lista');
+      ShoppingCartService.addItem({item:item,count:1,costValue:cost,saleValue:value,soldValue:value});
+    }else{
+      $cordovaToast.showShortTop('Produto sem estoque!');
+    }
   };
   $scope.getFather = function(value){
     resetSearch();

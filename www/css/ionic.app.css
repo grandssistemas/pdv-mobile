@@ -9961,6 +9961,9 @@ a.button {
     font-size: 30px !important; }
   .button.button-balanced.button-clear {
     font-size: 45px !important; }
+  .button.button-balanced.button-clear.button-icon {
+    height: 110px !important;
+    max-height: 110px; }
   .item p {
     font-size: 18px !important; }
   b, strong {
@@ -9980,7 +9983,9 @@ a.button {
   .button-outline.button-outline {
     height: 40px !important; }
   .button.button-balanced {
-    height: 40px !important; } }
+    height: 40px !important; }
+  .after-icons {
+    margin-top: -35px !important; } }
 
 /* Small devices */
 @media (min-width: 768px) and (max-width: 992px) {
