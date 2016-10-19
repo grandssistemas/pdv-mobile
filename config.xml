@@ -30,4 +30,6 @@
     <plugin name="phonegap-plugin-barcodescanner" spec="~6.0.2">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="undefined" />
     </plugin>
+    <plugin name="cordova-plugin-poyntprinter" spec="https://github.com/grandssistemas/poynt-printer.git" />
+    <plugin name="cordova-plugin-conectaredecard" spec="https://github.com/grandssistemas/ConectaRedeCard.git" />
 </widget>
