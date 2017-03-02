@@ -1,4 +1,9 @@
 <ion-view title="Faturamento">
+  <ion-nav-bar class="bar-balanced" align-title="center">
+    <ion-nav-back-button  class="button-clear" ng-show="status != 'FINISH'">
+      <i class="ion-chevron-left"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
     <ion-content class="has-header" padding="true">
 				<h5>Subtotal</h5>
 				<h1 class="n-m-t balanced">{{entity.subTotal|currency:'R$ '}}</h1>
@@ -13,7 +18,7 @@
           <div class="col">
             <a class="button button-clear button-icon"
             ng-class="{'button-balanced':paymentType === 'Real','button-dark':paymentType !== 'Real'}"
-            ng-click="paymentType = 'Real'">
+            ng-click="paymentType = 'Real'" ng-disabled="status === 'FINISH'">
               <i class="fa fa-money fa-3x"></i>
             </a>
             <h5>Real</h5>
@@ -21,7 +26,7 @@
           <div class="col">
             <a class="button button-clear button-icon"
               ng-class="{'button-balanced':paymentType === 'Cartão de Crédito','button-dark':paymentType !== 'Cartão de Crédito'}"
-              ng-click="paymentType = 'Cartão de Crédito'">
+              ng-click="paymentType = 'Cartão de Crédito'" ng-disabled="status === 'FINISH'">
               <i class="fa fa-credit-card-alt fa-3x"></i>
             </a>
             <h5>Crédito</h5>
@@ -29,7 +34,7 @@
           <div class="col">
             <a class="button button-clear button-icon"
               ng-class="{'button-balanced':paymentType === 'Cartão de Débito','button-dark':paymentType !== 'Cartão de Débito'}"
-              ng-click="paymentType = 'Cartão de Débito'">
+              ng-click="paymentType = 'Cartão de Débito'" ng-disabled="status === 'FINISH'">
               <i class="fa fa-credit-card fa-3x"></i>
             </a>
             <h5>Débito</h5>

@@ -1,6 +1,5 @@
 <ion-view view-title="Pedido de Venda">
   <ion-content class="padding has-header">
-
     <p class="balanced text-center n-m-b">BUSCAR PRODUTO</p>
     <div class="item-input-inset">
       <label class="item-input-wrapper">
@@ -16,8 +15,8 @@
       <button class="button button-small button-balanced"
       ng-class="{'button-outline': place != 'PRODUCTTYPE'}"
       ng-click="getLevel('PRODUCTTYPE')">Tipo de Produtos</button>
-      <button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"
-              ng-click="openBarcode()"></button>
+      <!--<button class="button button-small button-balanced button-outline fa fa-barcode fa-2x"-->
+              <!--ng-click="openBarcode()"></button>-->
     </div>
     <div>
     <p class="balanced text-center m-t">LISTA DE COMPRA</p>
@@ -49,7 +48,7 @@
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-balanced footer-md">
   <span class="title">Total: {{entity.total|currency:'R$'}}</span>
-  <div class="buttons" ng-click="doSomething()">
+  <div class="buttons">
     <button class="button button-dark" ng-click="save(entity)">Fechar pedido</button>
   </div>
 </ion-footer-bar>
