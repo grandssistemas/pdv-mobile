@@ -30,6 +30,10 @@ angular.module('app.core', ['ionic',
     templateUrl: 'templates/sale.html',
     controller: 'SaleController'
   });
+  $stateProvider.state('menu.about', {
+    url: '/sale',
+    templateUrl: 'templates/about.html'
+  });
   $stateProvider.state('menu.searchprod', {
     url: '/searchprod',
     templateUrl: 'templates/searchprod.html',
