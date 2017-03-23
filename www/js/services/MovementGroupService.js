@@ -7,6 +7,7 @@ angular.module('app.core')
   this.print = print;
 
   function save(entity){
+    correctTypes(entity);
     if(entity.id){
       return BaseService.put(url.concat('/').concat(entity.id),entity);
     }
@@ -15,6 +16,7 @@ angular.module('app.core')
 
 
   function billing(entity){
+    correctTypes(entity);
     if(entity.id){
       return BaseService.put(url.concat('/domovement/').concat(entity.id),entity);
     }
@@ -24,4 +26,13 @@ angular.module('app.core')
   function print(mg){
     return $http.post(url + '/printpoynt/'+mg.id, {responseType: 'arraybuffer'})
   };
+
+  function correctTypes(entity) {
+    entity.type = "br.com.codein.movementgroup.domain.model.stock.MovementGroup"
+    entity.movements.forEach(function(movement){
+      if (!movement.type){
+        movement.type = "br.com.codein.movementgroup.domain.model.stock.MovementStock"
+      }
+    })
+  }
 })
