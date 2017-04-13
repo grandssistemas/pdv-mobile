@@ -1,3 +1,3 @@
 angular.module('app.core')
-.service('SaleService', function($http,BaseService){
-})
+  .service('SaleService', function ($http, BaseService) {
+  });
