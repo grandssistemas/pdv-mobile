@@ -95,4 +95,4 @@ angular.module('app.core', ['ionic',
         }
       };
     })
-  }).value('route', 'https://192.168.25.89:8443/fashionmanager-api');
+  }).value('route', 'https://177.72.161.165:8443/fashionmanager-api');
